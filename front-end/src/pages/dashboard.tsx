@@ -7,10 +7,10 @@ import { api } from "../services/apiClient";
 import { withSSRAuth } from "../utils/withSSRAuth";
 
 export default function Dashboard() {
-  const { user } = useContext(AuthContext);
+  const { user, signOut } = useContext(AuthContext);
 
   const userCanSeeMetrics = useCan({
-    permission: ['metrics.list']
+    permissions: ['metrics.list']
   })
 
   useEffect(() => {
@@ -29,9 +29,11 @@ export default function Dashboard() {
       )}
 
       {/* Primeira forma  */}
-      <Can permission={['metrics.list']}>
+      <Can permissions={['metrics.list']}>
         <div> Metricas Component </div>
       </Can>
+
+      <button onClick={signOut}>Sair</button>
 
     </>
   )
